@@ -41,7 +41,7 @@
 
 			<form th:if="${produto != null}" th:action="@{/produto/salvar}" th:object="${produto}" method="post">
 				
-				<input type="hidden" th:field="$produto.id">
+				<input type="hidden" th:field="${produto.id}">
 				
 				<ul>
 					<li><h4>Descrição</h4></li>

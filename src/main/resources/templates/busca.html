@@ -14,23 +14,23 @@
         
         <nav>
             <div class="ul">
-                <a href="/">
-                	<div class="li"><i class="fas fa-home"></i> <span>Início</span> </div>
-                </a>
-				<a href="/produto/cadastro">
-					<div class="li"><i class="fas fa-address-card"></i> <span>Cadastro</span> </div>
-				</a>
-				<a href="/produto/mensagem">
-					<div class="li"><i class="fas fa-edit"></i> <span>Editar produto</span> </div>
-				</a>
-				<a href="/produto/busca">
-					<div class="li  selected"><i class="fas fa-search"></i> <span>Buscar</span> </div>
-				</a>
-				<a href="/produto/estoque">
-					<div class="li"><i class="fas fa-layer-group"></i> <span>Estoque</span> </div>
-				</a>
+                <a href="/"><div class="li"><i class="fas fa-home"></i> <span>Início</span> </div></a>
+				<a href="/produto/cadastro"><div class="li"><i class="fas fa-address-card"></i> <span>Cadastro</span> </div></a>
+				<a href="/produto/mensagem"><div class="li"><i class="fas fa-edit"></i> <span>Editar produto</span> </div></a>
+				<a href="/produto/busca"><div class="li  selected"><i class="fas fa-search"></i> <span>Buscar</span> </div></a>
+				<a href="/produto/estoque"><div class="li"><i class="fas fa-layer-group"></i> <span>Estoque</span> </div></a>
             </div>
         </nav>
+
+		<header>
+            <div>RAIZ FAST PLAY</div>
+            <ul>
+                <li>
+                    <input type="text" name="" id="">
+                </li>
+                
+            </ul>
+        </header>
         
         <div class="bloco">
         	<h1>BUSCAR PRODUTOS</h1>
@@ -69,8 +69,12 @@
 						<td th:text="${u.descricao}"></td>
 						<td th:if="${mostrarTodosDados} == true" th:text="${u.categoria}"></td>
 						<td>
-							<a th:href="'/produto/editar/' + ${u.id}"><i class="fas fa-edit"></i></a>
-							<a href="/"><i class="fas fa-trash-alt"></i></a>
+							<a th:href="'/produto/editar/' + ${u.id}">
+								<i class="fas fa-edit"></i>
+							</a>
+							<a th:href="'/produto/remover/' + ${u.id}" onclick="if(!confirm('Você quer realmente remover o produto?')) return false;">
+								<i class="fas fa-trash-alt"></i>
+							</a>
 						</td>
 					</tr>
             	</table>

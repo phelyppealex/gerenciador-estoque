@@ -21,7 +21,7 @@
 					<div class="li"><i class="fas fa-address-card"></i> <span>Cadastro</span> </div>
 				</a>
 				<a href="/produto/mensagem">
-					<div class="li"><i class="fas fa-edit"></i> <span>Editar produto</span> </div>
+					<div class="li selected"><i class="fas fa-edit"></i> <span>Editar produto</span> </div>
 				</a>
 				<a href="/produto/busca">
 					<div class="li"><i class="fas fa-search"></i> <span>Buscar</span> </div>
@@ -52,8 +52,12 @@
 						<td th:text="${u.descricao}"></td>
 						<td th:text="${u.categoria}"></td>
 						<td>
-							<a th:href="'/produto/editar/' + ${u.id}"><i class="fas fa-edit"></i></a>
-							<a href="/"><i class="fas fa-trash-alt"></i></a>
+							<a th:href="'/produto/editar/' + ${u.id}">
+								<i class="fas fa-edit"></i>
+							</a>
+							<a th:href="'/produto/remover/' + ${u.id}" onclick="if(!confirm('Você quer realmente remover o produto?')) return false;">
+								<i class="fas fa-trash-alt"></i>
+							</a>
 						</td>
 					</tr>
             	</table>

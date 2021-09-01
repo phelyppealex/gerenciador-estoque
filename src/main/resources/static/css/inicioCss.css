@@ -8,6 +8,18 @@
 body{
     background-color: rgb(228, 228, 228);
 }
+header{
+	margin-left: 275px;
+	height: 80px;
+}
+header div{
+	line-height: 80px;
+	font-size: 30px;
+}
+header form ul{
+	display: inline-block;
+	float: right;
+}
 nav{
 	background-color: white;
     width: 225px;
@@ -49,7 +61,7 @@ nav .ul a {
 .bloco{
 	width: 500px;
 	margin-left: 275px;
-	margin-top: 30px;
+	margin-top: 5px;
 	border-radius: 5px;
 	padding: 20px;
 	box-shadow: 1px 0 5px rgb(110, 110, 110);

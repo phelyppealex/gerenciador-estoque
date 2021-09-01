@@ -11,8 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import crud.Produtos.Produto;
 
@@ -60,6 +62,24 @@ public class BuscaProdutoController {
 		
 		model.addAttribute("produtosEncontrados", produtosEncontrados);
 		return "estoque";
+	}
+	
+	@GetMapping("/remover/{id}")
+	public String remover(@PathVariable("id") Integer idProduto, RedirectAttributes attr, HttpSession sessao) {
+		List<Produto> produtosCadastrados = (List<Produto>) sessao.getAttribute("produtosCadastrados");
+		
+		Produto p = new Produto();
+		p.setId(idProduto);
+		
+		boolean removeu = produtosCadastrados.remove(p);
+		
+		if(removeu) {
+			attr.addAttribute("msgSucesso", "Remoção bem sucedida");
+		}else {
+			attr.addAttribute("msgErro", "O produto não foi removido");
+		}
+		
+		return "redirect:/produto/buscar";
 	}
 	
 	@ModelAttribute("categorias")
