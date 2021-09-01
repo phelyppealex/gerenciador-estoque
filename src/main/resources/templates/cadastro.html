@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeLeaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeLeaf/Layout">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link rel="stylesheet" href="/css/inicioCss.css">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+		
+        <title>Cadastro</title>
+    </head>
+    <body>
+        
+        <nav>
+            <div class="ul">
+                <a href="/"><div class="li"><i class="fas fa-home"></i> <span>Início</span> </div></a>
+				<a href="/produto/cadastro"><div class="li selected"><i class="fas fa-address-card"></i> <span>Cadastro</span> </div></a>
+				<a href="/produto/mensagem"><div class="li"><i class="fas fa-edit"></i> <span>Editar produto</span> </div></a>
+				<a href="/produto/busca"><div class="li"><i class="fas fa-search"></i> <span>Buscar</span> </div></a>
+				<a href="/produto/estoque"><div class="li"><i class="fas fa-layer-group"></i> <span>Estoque</span> </div></a>
+            </div>
+        </nav>
+        
+        <div class="bloco">
+        	
+        	<h1>CADASTRO DE PRODUTOS</h1>
+        	
+        	<hr>
+
+			<div th:if="${msgSucesso} != null">
+				<span th:text="${msgSucesso}" style="color: rgb(0, 163, 0); font-family: sans-serif; font-weight: bold;"></span>
+				<br><br>
+			</div>
+
+			<div th:if="${msgErro} != null">
+				<b th:text="${msgErro}" style="color: red;"></b>
+				<br><br>
+			</div>
+
+			<form th:action="@{/produto/salvar}" th:object="${produto}" method="post">
+				
+				<ul>
+					<li><h4>Descrição</h4></li>
+					<li><input type="text" th:field="${produto.descricao}" placeholder="Ex.: Galaxy S9, TV Samsung 40''"></li>
+					
+					<li><h4>Categoria</h4></li>
+					<li>
+						<select name="" id="" th:field="${produto.categoria}">
+							<option value="">- - - - - - -</option>
+							<option th:each="c : ${categorias}" th:text="${c}" th:value="${c}"></option>
+						</select>
+					</li>
+					
+					<li>
+						<input type="submit" value="Cadastrar" class="go">
+						<input type="submit" value="Cancelar" formaction="/" formmethod="get" class="cancel">
+					</li>
+				</ul>
+				
+			</form>
+			
+        </div>
+
+    </body>
+</html>
