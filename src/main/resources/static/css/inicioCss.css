@@ -3,22 +3,29 @@
     margin: 0;
     text-decoration: none;
 	list-style-type: none;
-	font-family: sans-serif;
 }
 body{
     background-color: rgb(228, 228, 228);
 }
 header{
-	margin-left: 275px;
-	height: 80px;
-}
-header div{
-	line-height: 80px;
-	font-size: 30px;
-}
-header form ul{
+	height: 90px;
+	width: 100%;
+	position: fixed;
+	top: 0;
 	display: inline-block;
-	float: right;
+	margin-left: 275px;
+}
+header img{
+	width: 48px;
+	height: 50px;
+	margin-top: 20px;
+	float: left;
+}
+header label{
+	margin-left: 20px;
+	font-size: 30px;
+	float: left;
+	line-height: 90px;
 }
 nav{
 	background-color: white;
@@ -61,7 +68,7 @@ nav .ul a {
 .bloco{
 	width: 500px;
 	margin-left: 275px;
-	margin-top: 5px;
+	margin-top: 115px;
 	border-radius: 5px;
 	padding: 20px;
 	box-shadow: 1px 0 5px rgb(110, 110, 110);
@@ -145,11 +152,11 @@ input[type="checkbox"]{
 }
 .go:hover{
 	background-color: rgba(45, 209, 45, 0.904);
-	border: none;
+	border: 1px solid rgb(0,0,0,0);
 	color: white;
 }
 .cancel:hover{
 	background-color: rgba(255, 0, 0, 0.664);
+	border: 1px solid rgb(0,0,0,0);
 	color: white;
-	border:none;
 }
