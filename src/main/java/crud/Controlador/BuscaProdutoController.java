@@ -36,7 +36,12 @@ public class BuscaProdutoController {
 		List<Produto> produtosCadastrados = (List<Produto>) sessao.getAttribute("produtosCadastrados");
 		List<Produto> produtosEncontrados = new ArrayList<>();
 		
-		if((descricao != null || !descricao.isEmpty()) & produtosCadastrados != null){
+		if((descricao == null || descricao.isEmpty()) & produtosCadastrados != null) {
+			
+			produtosEncontrados = produtosCadastrados;
+			
+		}else if((descricao != null || !descricao.isEmpty()) & produtosCadastrados != null){
+			
 			produtosEncontrados = (List<Produto>) produtosCadastrados.stream()
 					.filter(
 						u -> u.getDescricao().toLowerCase().contains(

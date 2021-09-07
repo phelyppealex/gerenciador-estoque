@@ -23,18 +23,25 @@
         </nav>
 
 		<header>
-            <div>RAIZ FAST PLAY</div>
-            <ul>
-                <li>
-                    <input type="text" name="" id="">
-                </li>
-                
-            </ul>
+	        <img src="/imagens/logo.png" alt="Logo RFP">
+	        <label>
+            	RAIZ FAST PLAY
+            </label>
         </header>
         
         <div class="bloco">
         	<h1>BUSCAR PRODUTOS</h1>
         	<hr>
+        	
+        	<div th:if="${msgSucesso} != null">
+				<span th:text="${msgSucesso}" style="color: rgb(0, 163, 0); font-family: sans-serif; font-weight: bold;"></span>
+				<br><br>
+			</div>
+
+			<div th:if="${msgErro} != null">
+				<span th:text="${msgErro}" style="color: red; font-family: sans-serif; font-weight: bold;"></span>
+				<br><br>
+			</div>
         	
         	<form th:action="@{/produto/buscar}" method="get">
                 <ul>

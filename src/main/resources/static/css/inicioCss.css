@@ -20,12 +20,14 @@ header img{
 	height: 50px;
 	margin-top: 20px;
 	float: left;
+	-webkit-filter: drop-shadow(2px 1px 2px black);
 }
 header label{
-	margin-left: 20px;
+	margin-left: 10px;
 	font-size: 30px;
 	float: left;
 	line-height: 90px;
+	text-shadow: 2px 1px 2px black;
 }
 nav{
 	background-color: white;
@@ -66,9 +68,9 @@ nav .ul a {
 	padding: 15px 0;
 }
 .bloco{
-	width: 500px;
 	margin-left: 275px;
-	margin-top: 115px;
+	margin-top: 110px;
+	margin-right: 50px;
 	border-radius: 5px;
 	padding: 20px;
 	box-shadow: 1px 0 5px rgb(110, 110, 110);
