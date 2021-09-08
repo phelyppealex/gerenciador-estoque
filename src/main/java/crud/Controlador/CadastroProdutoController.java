@@ -82,7 +82,7 @@ public class CadastroProdutoController {
 		int id = 0;
 		
 		model.addAttribute("id", id);
-		model.addAttribute("mensagem", "Não é possível acessar esta página por aqui, é preciso que vá para a página de buscas incialmente. Ex.:");
+		model.addAttribute("mensagem", "Não é possível acessar esta página por aqui, é preciso que vá para a página de buscas ou estoque incialmente. Ex.:");
 		
 		return "editar";
 	}
