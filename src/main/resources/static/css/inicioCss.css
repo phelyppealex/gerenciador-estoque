@@ -75,13 +75,7 @@ nav .ul a {
 	padding: 15px 0;
 }
 nav .ul a:hover{
-	color: rgba(0, 140, 255, 0.790);
-}
-nav .ul a:hover .li{
-	font-size: 17.5px
-}
-nav .ul a:hover .li i{
-	font-size: 22px
+	color: #f36779;
 }
 nav .ul .li{
 	margin-top: 13px;
@@ -91,9 +85,15 @@ nav .ul .li{
 	font-size: 16px;
 	bottom: 0;
 }
+nav .ul a:hover .li{
+	font-size: 17.5px
+}
 nav .ul .li i{
 	margin-left: 20px;
 	font-size: 20px;
+}
+nav .ul a:hover .li i{
+	font-size: 22px
 }
 nav .ul .li span{
 	margin-left: 20px;

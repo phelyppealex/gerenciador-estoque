@@ -46,7 +46,11 @@
 			</div>
 
 			<div th:if="${msgErro} != null">
-				<span th:text="${msgErro}" style="color: red; font-family: sans-serif; font-weight: bold;"></span>
+				<ul>
+					<li th:each="m : ${msgErro}">
+						<span th:text="${m}" style="color: red; font-family: sans-serif; font-weight: bold;"></span>
+					</li>
+				</ul>
 				<br><br>
 			</div>
 

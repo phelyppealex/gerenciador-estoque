@@ -32,7 +32,13 @@ public class CadastroProdutoController {
 	public String salvar(Produto produto, RedirectAttributes attr, HttpSession sessao){
 		Integer id = (Integer) sessao.getAttribute("id");
 		List<Produto> produtosCadastrados = (List<Produto>) sessao.getAttribute("produtosCadastrados");
-		
+
+			List<String> msgErro = validarDados(produto);
+
+			if(!msgErro.isEmpty()){
+				attr.addFlashAttribute("msgErro", msgErro);
+			}
+
 			if(id == null) {
 				id = 1;
 			}
@@ -75,6 +81,21 @@ public class CadastroProdutoController {
 		model.addAttribute("produto", p);
 		
 		return "editar";
+	}
+
+	public List<String> validarDados(Produto produto){
+
+		List<String> msgs = new ArrayList<>();
+
+		if(produto.getDescricao() == null || produto.getDescricao().isEmpty()){
+			msgs.add("- O campo ''Descrição'' não foi preenchido!");
+		}
+		if(produto.getCategoria() == null || produto.getDescricao().isEmpty()){
+			msgs.add("- Selecione uma categoria!");
+		}
+
+		return msgs;
+
 	}
 	
 	@GetMapping("/mensagem")
