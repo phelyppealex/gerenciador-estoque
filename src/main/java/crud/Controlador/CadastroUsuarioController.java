@@ -1,0 +1,67 @@
+package crud.Controlador;
+
+import crud.Usuarios.Usuario;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+@Controller
+@RequestMapping("/usuario")
+public class CadastroUsuarioController {
+    
+    @GetMapping("/cadastro")
+	public String cadastro(ModelMap model) {
+		model.addAttribute("usuario", new Usuario());
+	    return "cadastro";
+	}
+
+    @PostMapping("/salvar")
+	public String salvar(Usuario usuario, RedirectAttributes attr, HttpSession sessao){
+		
+		Integer id = (Integer) sessao.getAttribute("idUsuario");
+		List<Usuario> usuariosCadastrados = (List<Usuario>) sessao.getAttribute("usuariosCadastrados");
+
+		List<String> msgErro = null;
+
+		if(!msgErro.isEmpty()){
+			attr.addFlashAttribute("msgErro", msgErro);
+		}
+
+		if(id == null) {
+			id = 1;
+		}
+		
+		if(usuariosCadastrados == null) {
+			usuariosCadastrados = new ArrayList<>();
+		}
+		
+		//Testando se é edição ou cadastro
+		if(usuario.getId() == 0) {
+			//Cadastro
+			usuario.setId(id);
+			usuariosCadastrados.add(usuario);
+			
+			id++;
+			sessao.setAttribute("idUsuario", id);
+			sessao.setAttribute("produtosCadastrados", usuariosCadastrados);
+			
+			attr.addFlashAttribute("msgSucesso", "Cadastrado com sucesso");
+		}else {
+			//Edição
+			usuariosCadastrados.remove(usuario);
+			usuariosCadastrados.add(usuario);
+			attr.addFlashAttribute("msgSucesso", "Edição bem sucedida!");
+		}
+		
+		return "redirect:/produto/cadastro";
+	}
+}
