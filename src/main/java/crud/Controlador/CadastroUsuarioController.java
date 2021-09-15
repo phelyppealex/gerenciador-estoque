@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -63,5 +64,38 @@ public class CadastroUsuarioController {
 		}
 		
 		return "redirect:/produto/cadastro";
+	}
+
+	@GetMapping("/editar/{id}")
+	public String editarProduto(@PathVariable("id") Integer idUsuario, HttpSession sessao, ModelMap model) {
+		List<Usuario> usuariosCadastrados = (List<Usuario>) sessao.getAttribute("usuariosCadastrados");
+		
+		Usuario u = new Usuario();
+		u.setId(idUsuario);
+		
+		int posicao = usuariosCadastrados.indexOf(u);
+		u = usuariosCadastrados.get(posicao);
+		
+		model.addAttribute("usuario", u);
+		
+		return "editar";
+	}
+
+	public List<String> validarDados(Usuario usuario){
+
+		List<String> msgs = new ArrayList<>();
+
+		if(usuario.getNome() == null || usuario.getNome().isEmpty()){
+			msgs.add("- O campo ''Nome'' não foi preenchido!");
+		}
+		if(usuario.getEmail() == null || usuario.getEmail().isEmpty()){
+			msgs.add("- O campo ''Email'' não foi preenchido!");
+		}
+		if(usuario.getSenha() == null || usuario.getSenha().isEmpty()){
+			msgs.add("- O campo ''Senha'' não foi preenchido!");
+		}
+
+		return msgs;
+
 	}
 }
