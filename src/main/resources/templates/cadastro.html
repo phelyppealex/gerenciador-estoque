@@ -28,10 +28,64 @@
         </nav>
 
 		<header>
-	        <img src="/imagens/logo.png" alt="Logo RFP">
-	        <label>
-            	RAIZ FAST PLAY
-            </label>
+	        <a href="/">
+				<img src="/imagens/logo.png" alt="Logo RFP">
+				<label>
+					RAIZ FAST PLAY
+				</label> 	
+			</a>
+
+			<input type="checkbox" id="checkCadastro">
+            <label for="checkCadastro" class="btnHeader btnCadastro">CADASTRE-SE</label>
+            <input type="checkbox" id="checkLogin">
+            <label for="checkLogin" class="btnHeader btnLogin">ENTRAR</label>
+
+			<!--FORMULÁRIO DE CADASTRO-->
+
+            <div class="formulario cadastro">
+                <h1>CADASTRO</h1>
+                <label for="checkCadastro"><i class="fas fa-times"></i></label>
+                <form th:action="@{/usuario/salvar}" th:object="${usuario}" method="post">
+                    <ul>
+                        <li><h4>Nome</h4></li>
+                        <li><input type="text" th:field="${usuario.nome}" placeholder="Ex.: João Alberto"></li>
+                        <li><h4>Email</h4></li>
+                        <li><input type="text" th:field="${usuario.email}" placeholder="Ex.: fulano@email.com"></li>
+                        <li><h4>Senha</h4></li>
+                        <li><input type="text" th:field="${usuario.senha}" placeholder="Senha"></li>
+                        <li><h4>Confirme a senha</h4></li>
+                        <li><input type="password" placeholder="Senha"></li>
+                        <li>
+                            <br>
+                            <input type="submit" class="go" value="Cadastrar">
+                            <input type="submit" class="cancel" value="Cancelar" formaction="/" formmethod="get">
+                        </li>
+                    </ul>
+                </form>
+            </div>
+
+            <!--FORMULÁRIO DE LOGIN-->
+
+            <div class="formulario login">
+                <h1>LOGIN</h1>
+                <label for="checkLogin"><i class="fas fa-times"></i></label>
+                <form th:action="@{/usuario/login}" th:object="${login}" method="post">
+                    <ul>
+                        <li><h4>Email</h4></li>
+                        <li><input type="text" value="Email"></li>
+                        <li><h4>Senha</h4></li>
+                        <li><input type="text" value="Senha"></li>
+                        <li>
+                            <br>
+                            <input type="submit" class="go" value="Cadastrar">
+                            <input type="submit" class="cancel" value="Cancelar" formaction="/" formmethod="get">
+                        </li>
+                        <li><br><a href="">Esqueceu sua senha?</a></li>
+                    </ul>
+                </form>
+            </div>
+
+            <div class="mascara"></div>
         </header>
         
         <div class="bloco">

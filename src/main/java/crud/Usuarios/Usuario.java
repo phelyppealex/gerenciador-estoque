@@ -9,10 +9,12 @@ public class Usuario {
     private String email;
     private String senha;
 
+
     @Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -25,7 +27,7 @@ public class Usuario {
 		return id == other.id;
 	}
 
-    public void setId(int id){
+	public void setId(int id){
         this.id = id;
     }
 

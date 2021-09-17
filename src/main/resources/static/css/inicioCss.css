@@ -9,11 +9,12 @@ body{
 }
 header{
 	height: 90px;
-	width: 100%;
+	width: calc(100% - 275px);
 	position: fixed;
 	top: 0;
 	display: inline-block;
 	margin-left: 275px;
+	user-select: none;
 }
 header img{
 	width: 48px;
@@ -29,6 +30,8 @@ header label{
 	float: left;
 	line-height: 90px;
 	text-shadow: 2px 1px 2px black;
+	color: black;
+	cursor: pointer;
 }
 nav{
 	background-color: white;
@@ -37,6 +40,7 @@ nav{
     box-shadow: 1px 0 5px rgb(110, 110, 110);
     position: fixed;
     top: 0;
+	user-select: none;
 }
 nav .usuario{
 	position: relative;
@@ -136,6 +140,7 @@ h1{
 h4{
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 	margin: 8px 0;
+	margin-top: 25px;
 }
 input[type="submit"]{
 	border: none;
@@ -154,7 +159,8 @@ input[type="submit"]{
 select{
 	margin-bottom: 15px;
 }
-input[type="text"]{
+/*Estilo dos campos de texto*/
+input[type="text"], input[type="password"]{
 	border: none;
 	outline: none;
 	background: none;
@@ -163,14 +169,15 @@ input[type="text"]{
 	width: 250px;
 	border-bottom: 2px solid black;
 }
-input[type="text"]:hover{
+input[type="text"]:hover, input[type="password"]:hover{
 	border-bottom: 2px solid rgb(45, 209, 45);
 	background-color: rgba(179, 236, 231, 0.280);
 }
-input[type="text"]:focus{
+input[type="text"]:focus, input[type="password"]:focus{
 	border-bottom: 2px solid rgb(51, 155, 253);
 	background-color: rgba(179, 236, 231, 0.280);
 }
+
 input[type="checkbox"]{
 	margin: 15px 0;
 	border: none;
@@ -179,7 +186,7 @@ input[type="checkbox"]{
 	background-color: rgba(179, 236, 231, 0.200);
 }
 .go{
-	color: rgba(45, 209, 45, 0.904);
+	color: rgba(45, 150, 45, 0.904);
 }
 .cancel{
 	color: rgba(255, 0, 0, 0.664);
@@ -193,4 +200,104 @@ input[type="checkbox"]{
 	background-color: rgba(255, 0, 0, 0.664);
 	border: 1px solid rgb(0,0,0,0);
 	color: white;
+}
+#checkCadastro{
+	display: none;
+}
+#checkLogin{
+	display: none;
+}
+
+/**Estilo dos dois botões do header**/
+.btnHeader{
+	font-family: sans-serif;
+	text-shadow: none;
+	font-size: 16px;
+	margin: 0;
+	line-height: normal;
+	padding: 8px;
+	border-radius: 5px;
+	position: absolute;
+	transform: translate(0, -50%);
+	top: 50%;
+	right: 50px;
+	box-shadow: 1px 0 5px rgb(66, 66, 66);
+}
+/*Estilo do botão cadastro*/
+.btnCadastro{
+	background-color: rgb(23, 23, 167);
+	color: white;
+	margin-right: 91px;
+}
+.btnCadastro:hover{
+	background-color: rgb(28, 124, 202);
+}
+/*Estilo do botão login*/
+.btnLogin{
+	background-color: rgb(45, 180, 45);
+}
+.btnLogin:hover{
+	background-color: rgb(57, 236, 57);
+}
+.mascara{
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: rgba(0, 0, 0, 0.288);
+	z-index: 99;
+	display: none;
+}
+.formulario{
+	background-color: white;
+	border: 1px solid black;
+	position: fixed;
+	transform: translate(-50%, -50%);
+	top: 50%;
+	left: 50%;
+	box-shadow: 1px 0 5px rgb(0, 0, 0);
+	z-index: 100;
+}
+.cadastro{
+	display: none;
+}
+.login{
+	display: none;
+}
+.formulario h1{
+	font-size: 25px;
+	padding: 8px;
+}
+.formulario form{
+	padding: 0 30px;
+	margin: 0;
+	padding-top: 15px;
+}
+.formulario label{
+	font-size: 20px;
+	text-shadow: none;
+	cursor: pointer;
+	right: 0;
+	top: 0;
+	margin: 0;
+	padding: 13px 18px;
+	position: absolute;
+	line-height: normal;
+	transition: .25s;
+}
+.formulario label:hover{
+	background-color: rgba(0, 0, 0, 0.150);
+}
+#checkCadastro:checked ~ .cadastro{
+	display: block;
+}
+#checkLogin:checked ~ .login{
+	display: block;
+}
+#checkCadastro:checked ~ .mascara{
+	display: block;
+}
+#checkLogin:checked ~ .mascara{
+	display: block;
 }

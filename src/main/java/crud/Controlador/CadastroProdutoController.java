@@ -17,14 +17,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import crud.Produtos.Produto;
+import crud.Usuarios.Usuario;
 
 @Controller
 @RequestMapping("/produto")
 public class CadastroProdutoController {
-	
+
 	@GetMapping("/cadastro")
 	public String cadastro(ModelMap model) {
 		model.addAttribute("produto", new Produto());
+		model.addAttribute("usuario", new Usuario());
 		return "cadastro";
 	}
 	

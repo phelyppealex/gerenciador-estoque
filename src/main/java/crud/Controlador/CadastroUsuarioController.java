@@ -31,7 +31,7 @@ public class CadastroUsuarioController {
 		Integer id = (Integer) sessao.getAttribute("idUsuario");
 		List<Usuario> usuariosCadastrados = (List<Usuario>) sessao.getAttribute("usuariosCadastrados");
 
-		List<String> msgErro = null;
+		List<String> msgErro = validarDados(usuario);
 
 		if(!msgErro.isEmpty()){
 			attr.addFlashAttribute("msgErro", msgErro);
