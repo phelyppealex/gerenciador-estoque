@@ -85,11 +85,7 @@ public class CadastroUsuarioController {
 		List<Usuario> usuariosCadastrados = (List<Usuario>) sessao.getAttribute("usuariosCadastrados");
 		Usuario userLogado = (Usuario) sessao.getAttribute("userLogado");
 		
-		List<String> msgErro = validarDadosLogin(login, sessao);
-
-		if(!msgErro.isEmpty()){
-			model.addAttribute("msgErro", msgErro);
-		}
+		
 
 		boolean achouUsuario = false;
 		
