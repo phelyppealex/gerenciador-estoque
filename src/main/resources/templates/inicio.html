@@ -13,9 +13,9 @@
     <body>
         
         <nav>
-            <div class="usuario">
+            <div class="usuario" th:if="${pessoa} != null">
 				<img src="/imagens/perfil_anonimo.jpg" alt="">
-				<label for="">Rafael Andrade</label>
+				<label th:text="${pessoa.nome}"></label>
 			</div>
 
             <div class="ul">

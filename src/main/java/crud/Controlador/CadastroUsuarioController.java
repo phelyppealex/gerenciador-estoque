@@ -1,5 +1,6 @@
 package crud.Controlador;
 
+import crud.Usuarios.DadosDeLogin;
 import crud.Usuarios.Usuario;
 
 import java.util.ArrayList;
@@ -18,12 +19,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 @RequestMapping("/usuario")
 public class CadastroUsuarioController {
-    
-    @GetMapping("/cadastro")
-	public String cadastro(ModelMap model) {
-		model.addAttribute("usuario", new Usuario());
-	    return "cadastro";
-	}
 
     @PostMapping("/salvar")
 	public String salvar(Usuario usuario, RedirectAttributes attr, HttpSession sessao){
@@ -53,7 +48,7 @@ public class CadastroUsuarioController {
 			
 			id++;
 			sessao.setAttribute("idUsuario", id);
-			sessao.setAttribute("produtosCadastrados", usuariosCadastrados);
+			sessao.setAttribute("usuariosCadastrados", usuariosCadastrados);
 			
 			attr.addFlashAttribute("msgSucesso", "Cadastrado com sucesso");
 		}else {
@@ -80,7 +75,21 @@ public class CadastroUsuarioController {
 		
 		return "editar";
 	}
-
+	
+	@PostMapping("/login")
+	public String login(Usuario login, HttpSession sessao, ModelMap model) {
+		List<Usuario> usuariosCadastrados = (List<Usuario>) sessao.getAttribute("usuariosCadastrados");
+		
+		for (Usuario log : usuariosCadastrados) {
+			if( log.getEmail() .equals(login.getEmail()) && log.getSenha() .equals(login.getSenha()) ) {
+				model.addAttribute("pessoa", log);
+			}
+		}
+		
+		return "cadastro";
+	}
+	
+	
 	public List<String> validarDados(Usuario usuario){
 
 		List<String> msgs = new ArrayList<>();

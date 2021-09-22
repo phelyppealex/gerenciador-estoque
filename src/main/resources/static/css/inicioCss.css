@@ -83,7 +83,7 @@ nav .ul a:hover{
 }
 nav .ul .li{
 	margin-top: 13px;
-	width: 222px;
+	width: calc(100% - 3px);
 	height: 45px;
 	font-weight: bold;
 	font-size: 16px;

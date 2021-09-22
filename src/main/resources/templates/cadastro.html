@@ -13,9 +13,9 @@
     <body>
         
         <nav>
-        	<div class="usuario">
+        	<div class="usuario" th:if="${pessoa} != null">
 				<img src="/imagens/perfil_anonimo.jpg" alt="">
-				<label for="">Rafael Andrade</label>
+				<label th:text="${pessoa.nome}"></label>
 			</div>
         	
             <div class="ul">
@@ -69,15 +69,15 @@
             <div class="formulario login">
                 <h1>LOGIN</h1>
                 <label for="checkLogin"><i class="fas fa-times"></i></label>
-                <form th:action="@{/usuario/login}" th:object="${login}" method="post">
+                <form th:action="@{/usuario/login}" th:object="${usuario}" method="post">
                     <ul>
                         <li><h4>Email</h4></li>
-                        <li><input type="text" value="Email"></li>
+                        <li><input type="text" th:field="${usuario.email}" placeholder="Email"></li>
                         <li><h4>Senha</h4></li>
-                        <li><input type="text" value="Senha"></li>
+                        <li><input type="text" th:field="${usuario.senha}" placeholder="Senha"></li>
                         <li>
                             <br>
-                            <input type="submit" class="go" value="Cadastrar">
+                            <input type="submit" class="go" value="Entrar">
                             <input type="submit" class="cancel" value="Cancelar" formaction="/" formmethod="get">
                         </li>
                         <li><br><a href="">Esqueceu sua senha?</a></li>
@@ -107,6 +107,8 @@
 				</ul>
 				<br><br>
 			</div>
+
+            <!--CADASTRO DE PRODUTOS-->
 
 			<form th:action="@{/produto/salvar}" th:object="${produto}" method="post">
 				

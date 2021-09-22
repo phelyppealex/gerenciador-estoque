@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import crud.Produtos.Produto;
+import crud.Usuarios.DadosDeLogin;
 import crud.Usuarios.Usuario;
 
 @Controller
