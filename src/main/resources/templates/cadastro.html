@@ -16,6 +16,7 @@
         	<div class="usuario" th:if="${pessoa} != null">
 				<img src="/imagens/perfil_anonimo.jpg" alt="">
 				<label th:text="${pessoa.nome}"></label>
+                <a href="/usuario/logoff">Sair</a>
 			</div>
         	
             <div class="ul">
@@ -110,7 +111,7 @@
 
             <!--CADASTRO DE PRODUTOS-->
 
-			<form th:action="@{/produto/salvar}" th:object="${produto}" method="post">
+			<!--<form th:action="@{/produto/salvar}" th:object="${produto}" method="post">
 				
 				<ul>
 					<li><h4>Descrição</h4></li>
@@ -130,7 +131,7 @@
 					</li>
 				</ul>
 				
-			</form>
+			</form>-->
 			
         </div>
 

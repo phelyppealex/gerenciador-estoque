@@ -23,8 +23,9 @@ import crud.Produtos.Produto;
 public class BuscaProdutoController {
 	
 	@GetMapping("/busca")
-	public String cadastro(ModelMap model) {
+	public String cadastro(ModelMap model, HttpSession sessao) {
 		model.addAttribute("produto", new Produto());
+		model.addAttribute("pessoa", sessao.getAttribute("userLogado"));
 		return "busca";
 	}
 	
@@ -35,6 +36,7 @@ public class BuscaProdutoController {
 		
 		List<Produto> produtosCadastrados = (List<Produto>) sessao.getAttribute("produtosCadastrados");
 		List<Produto> produtosEncontrados = new ArrayList<>();
+		model.addAttribute("pessoa", sessao.getAttribute("userLogado"));
 		
 		if((descricao == null || descricao.isEmpty()) & produtosCadastrados != null) {
 			
@@ -62,6 +64,7 @@ public class BuscaProdutoController {
 	public String estoque(ModelMap model, HttpSession sessao){
 		List<Produto> produtosCadastrados = (List<Produto>) sessao.getAttribute("produtosCadastrados");
 		List<Produto> produtosEncontrados = new ArrayList<>();
+		model.addAttribute("pessoa", sessao.getAttribute("userLogado"));
 		
 		produtosEncontrados = produtosCadastrados;
 		

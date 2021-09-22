@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import crud.Produtos.Produto;
-import crud.Usuarios.DadosDeLogin;
 import crud.Usuarios.Usuario;
 
 @Controller
@@ -25,9 +24,10 @@ import crud.Usuarios.Usuario;
 public class CadastroProdutoController {
 
 	@GetMapping("/cadastro")
-	public String cadastro(ModelMap model) {
+	public String cadastro(ModelMap model, HttpSession sessao) {
 		model.addAttribute("produto", new Produto());
 		model.addAttribute("usuario", new Usuario());
+		model.addAttribute("pessoa", sessao.getAttribute("userLogado"));
 		return "cadastro";
 	}
 	
@@ -36,6 +36,7 @@ public class CadastroProdutoController {
 		
 		Integer id = (Integer) sessao.getAttribute("id");
 		List<Produto> produtosCadastrados = (List<Produto>) sessao.getAttribute("produtosCadastrados");
+		attr.addFlashAttribute("pessoa", sessao.getAttribute("userLogado"));
 
 		List<String> msgErro = validarDados(produto);
 
