@@ -61,7 +61,7 @@ public class CadastroUsuarioController {
 			attr.addFlashAttribute("msgSucesso", "Edição bem sucedida!");
 		}
 		
-		return "redirect:/produto/cadastro";
+		return "redirect:/";
 	}
 
 	@GetMapping("/editar/{id}")
@@ -85,21 +85,24 @@ public class CadastroUsuarioController {
 		List<Usuario> usuariosCadastrados = (List<Usuario>) sessao.getAttribute("usuariosCadastrados");
 		Usuario userLogado = (Usuario) sessao.getAttribute("userLogado");
 		
-		
-
 		boolean achouUsuario = false;
+		
+		if(usuariosCadastrados == null) {
+			model.addAttribute("msgErro", "- Não existem usuários ainda, cadastre-os");
+			return "cadastro";
+		}
 		
 		for (Usuario log : usuariosCadastrados) {
 			if( log.getEmail() .equals(login.getEmail()) && log.getSenha() .equals(login.getSenha()) ) {
 				sessao.setAttribute("userLogado", log);
 				model.addAttribute("pessoa", sessao.getAttribute("userLogado"));
-				model.addAttribute("msgSucesso", "Usuário cadastrado com sucesso!");
+				model.addAttribute("msgSucesso", "Login efetuado com sucesso!");
 				achouUsuario = true;
 			}
 		}
 		
 		if(!achouUsuario) {
-			model.addAttribute("msgErro", "Usuário ou senha incorretos");
+			model.addAttribute("msgErro", "Email ou senha incorretos");
 		}
 		
 		return "cadastro";
@@ -143,5 +146,19 @@ public class CadastroUsuarioController {
 		}
 		
 		return null;
+	}
+
+
+	@GetMapping("/paginadelogin")
+	public String paginaDeLogin(ModelMap model, HttpSession sessao){
+		model.addAttribute("pessoa", sessao.getAttribute("userLogado"));
+		model.addAttribute("usuario", new Usuario());
+		return "signIn";
+	}
+	
+	@GetMapping("/paginadecadastro")
+	public String paginaDeCadastro(ModelMap model, HttpSession sessao) {
+		model.addAttribute("usuario", new Usuario());
+		return "signUp";
 	}
 }

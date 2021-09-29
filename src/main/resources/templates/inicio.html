@@ -5,10 +5,11 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
+        <link rel="shortcut icon" type="image/x-icon" href="/imagens/favicon.ico">
         <link rel="stylesheet" href="css/inicioCss.css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
 
-        <title>Início</title>
+        <title>Início - RFP</title>
     </head>
     <body>
         
@@ -16,6 +17,7 @@
             <div class="usuario" th:if="${pessoa} != null">
 				<img src="/imagens/perfil_anonimo.jpg" alt="">
 				<label th:text="${pessoa.nome}"></label>
+                <a href="/usuario/logoff" class="sair">Sair</a>
 			</div>
 
             <div class="ul">
@@ -34,11 +36,30 @@
 					RAIZ FAST PLAY
 				</label> 	
 			</a>
+
+            <div th:if="${pessoa} == null">
+                <a href="/usuario/paginadecadastro" class="btnHeader btnCadastro">CADASTRE-SE</a>
+                <a href="/usuario/paginadelogin" class="btnHeader btnLogin">ENTRAR</a>
+            </div>
         </header>
         
         <div class="bloco">
         	<h1>SISTEMA GERENCIADOR DE PRODUTOS <i>RAIZ FAST PLAY</i></h1>
             <hr>
+
+            <div th:if="${msgSucesso} != null">
+				<span th:text="${msgSucesso}" style="color: rgb(0, 163, 0); font-family: sans-serif; font-weight: bold;"></span>
+				<br><br>
+			</div>
+
+			<div th:if="${msgErro} != null">
+				<ul>
+					<li th:each="m : ${msgErro}">
+						<span th:text="${m}" style="color: red; font-family: sans-serif; font-weight: bold;"></span>
+					</li>
+				</ul>
+				<br><br>
+			</div>
         </div>
     </body>
 </html>

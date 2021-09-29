@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeLeaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeLeaf/Layout">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="/imagens/favicon.ico">
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/imagens/favicon.ico">
+    <link rel="stylesheet" href="/css/formsCss.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+	
+    <title>Cadastre-se - RFP</title>
+</head>
+<body>
+
+    <header>
+        <a href="/">
+            <img src="/imagens/logo.png" alt="Logo RFP">
+            <label>
+                RAIZ FAST PLAY
+            </label> 	
+        </a>
+    </header>
+
+    <div class="formulario cadastro">
+        <h1>CADASTRO</h1>
+        <form th:action="@{/usuario/salvar}" th:object="${usuario}" method="post">
+            <ul>
+                <li><h4>Nome</h4></li>
+                <li><input type="text" th:field="${usuario.nome}" placeholder="Ex.: João Alberto"></li>
+                <li><h4>Email</h4></li>
+                <li><input type="text" th:field="${usuario.email}" placeholder="Ex.: fulano@email.com"></li>
+                <li><h4>Senha</h4></li>
+                <li><input type="text" th:field="${usuario.senha}" placeholder="Senha"></li>
+                <li><h4>Confirme a senha</h4></li>
+                <li><input type="password" placeholder="Senha"></li>
+                <li>
+                    <br>
+                    <input type="submit" class="go" value="Cadastrar">
+                    <input type="submit" class="cancel" value="Cancelar" formaction="/" formmethod="get">
+                </li>
+            </ul>
+        </form>
+    </div>
+</body>
+</html>
