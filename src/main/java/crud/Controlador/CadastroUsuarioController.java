@@ -1,5 +1,6 @@
 package crud.Controlador;
 
+import crud.Produtos.Produto;
 import crud.Usuarios.Usuario;
 
 import java.util.ArrayList;
@@ -89,7 +90,7 @@ public class CadastroUsuarioController {
 		
 		if(usuariosCadastrados == null) {
 			model.addAttribute("msgErro", "- Não existem usuários ainda, cadastre-os");
-			return "cadastro";
+			return "signIn";
 		}
 		
 		for (Usuario log : usuariosCadastrados) {
@@ -103,7 +104,10 @@ public class CadastroUsuarioController {
 		
 		if(!achouUsuario) {
 			model.addAttribute("msgErro", "Email ou senha incorretos");
+			return "signIn";
 		}
+		
+		model.addAttribute("produto", new Produto());
 		
 		return "cadastro";
 	}

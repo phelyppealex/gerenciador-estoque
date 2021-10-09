@@ -16,8 +16,22 @@
         <nav>
         	<div class="usuario" th:if="${pessoa} != null">
 				<img src="/imagens/perfil_anonimo.jpg" alt="">
-				<label th:text="${pessoa.nome}"></label>
-                <a href="/usuario/logoff">Sair</a>
+				<label class="nome" th:text="${pessoa.nome}"></label>
+                <a href="/usuario/logoff" class="sair">Sair</a>
+
+                <input type="checkbox" id="cog">
+                <label for="cog" class="engrenagem"><i id="porca" class="fas fa-cog"></i></label>
+
+                <div class="configUser">
+                    <table>
+                        <tr>
+                            <td><a href="/gerenciarUsuarios">Gerenciar usuários</a></li></td>
+                        </tr>
+                        <tr>
+                            <td><a href="/usuario/logoff" class="sair">Sair</a></li></td>
+                        </tr>
+                    </table>
+                </div>
 			</div>
         	
             <div class="ul">
@@ -65,28 +79,6 @@
                     </ul>
                 </form>
             </div>
-
-            <!--FORMULÁRIO DE LOGIN-->
-
-            <div class="formulario login">
-                <h1>LOGIN</h1>
-                <label for="checkLogin"><i class="fas fa-times"></i></label>
-                <form th:action="@{/usuario/login}" th:object="${usuario}" method="post">
-                    <ul>
-                        <li><h4>Email</h4></li>
-                        <li><input type="text" th:field="${usuario.email}" placeholder="Email"></li>
-                        <li><h4>Senha</h4></li>
-                        <li><input type="text" th:field="${usuario.senha}" placeholder="Senha"></li>
-                        <li>
-                            <br>
-                            <input type="submit" class="go" value="Entrar">
-                            <input type="submit" class="cancel" value="Cancelar" formaction="/" formmethod="get">
-                        </li>
-                        <li><br><a href="">Esqueceu sua senha?</a></li>
-                    </ul>
-                </form>
-            </div>
-
             <!--<div class="mascara"></div>-->
         </header>
         
@@ -111,8 +103,11 @@
 			</div>
 
             <!--CADASTRO DE PRODUTOS-->
+            <div th:if="${pessoa} == null">
+                <h4>Você precisa fazer login para fazer cadastro de produtos</h4>
+            </div>
 
-			<!--<form th:action="@{/produto/salvar}" th:object="${produto}" method="post">
+			<form th:if="${pessoa} != null" th:action="@{/produto/salvar}" th:object="${produto}" method="post">
 				
 				<ul>
 					<li><h4>Descrição</h4></li>
@@ -132,7 +127,7 @@
 					</li>
 				</ul>
 				
-			</form>-->
+			</form>
 			
         </div>
 

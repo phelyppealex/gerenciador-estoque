@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import crud.Usuarios.Usuario;
 
+@Controller
 public class BuscaUsuarioController {
     @GetMapping("/busca")
 	public String cadastro(ModelMap model) {
@@ -80,5 +81,10 @@ public class BuscaUsuarioController {
 		}
 		
 		return "redirect:/produto/buscar";
+	}
+	
+	@GetMapping("/gerenciarUsuarios")
+	public String gerenciarUsuarios() {
+		return "todosUsuarios";
 	}
 }

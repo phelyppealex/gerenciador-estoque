@@ -100,7 +100,6 @@ public class CadastroProdutoController {
 		}
 
 		return msgs;
-
 	}
 	
 	@GetMapping("/mensagem")

@@ -2,42 +2,81 @@
     margin: 0;
     list-style: none;
 }
+ul{
+	margin: 0;
+	padding-right: 40px;
+}
 header{
-	height: 90px;
+	height: 80px;
 	width: 100%;
 	position: fixed;
 	top: 0;
 	display: inline-block;
 	user-select: none;
-    background-color: rgb(228, 228, 228);
+	z-index: 100;
 }
 header img{
 	width: 48px;
 	height: 50px;
     margin-left: 40px;
-	margin-top: 20px;
+	margin-top: 15px;
 	float: left;
 	-webkit-filter: drop-shadow(2px 1px 2px black);
 }
 header label{
 	margin-left: 10px;
-	font-size: 30px;
+	font-size: 27px;
 	font-family: "Times New Roman";
 	float: left;
-	line-height: 90px;
+	line-height: 80px;
 	text-shadow: 2px 1px 2px black;
 	color: black;
 	cursor: pointer;
 }
-.formulario{
-
-}
-.ilustracao{
+.bloco{
+	margin-top: 90px;
 	width: 100%;
-    object-fit: cover;
+	display: inline-block;
 }
-.container{
-	margin-top: 120px;
+.formulario{
+	position: absolute;
+	bottom: 50%;
+	right: 30%;
+	transform: translate(70%,50%);
+	background-color: white;
+	border-radius: 10px;
+	box-shadow: 0 0 30px rgb(110, 110, 110);
+	padding: 30px;
+	transition: .5s;
 }
-.row{
+
+input[type="submit"]{
+	border: none;
+	outline: none;
+	background: none;
+	border-radius: 5px;
+	font-weight: bold;
+	font-size: 15px;
+	padding: 8px;
+	border: 1px solid rgba(0, 0, 0, 0.247);
+	background-color: rgba(0, 0, 0, 0.025);
+	margin-right: 5px;
+	cursor: pointer;
+	transition: .25s;
+}
+.go{
+	color: rgba(45, 150, 45, 0.904);
+}
+.cancel{
+	color: rgba(255, 0, 0, 0.664);
+}
+.go:hover{
+	background-color: rgba(45, 209, 45, 0.904);
+	border: 1px solid rgb(0,0,0,0);
+	color: white;
+}
+.cancel:hover{
+	background-color: rgba(255, 0, 0, 0.664);
+	border: 1px solid rgb(0,0,0,0);
+	color: white;
 }
