@@ -9,8 +9,7 @@ public class Usuario {
     private String email;
     private String senha;
 
-
-    @Override
+	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}

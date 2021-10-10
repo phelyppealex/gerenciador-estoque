@@ -68,11 +68,16 @@ public class BuscaUsuarioController {
 	@GetMapping("/remover/{id}")
 	public String remover(@PathVariable("id") Integer idUsuario, RedirectAttributes attr, HttpSession sessao) {
 		List<Usuario> usuariosCadastrados = (List<Usuario>) sessao.getAttribute("usuariosCadastrados");
+		Usuario userLogado = (Usuario) sessao.getAttribute("userLogado");
 		
 		Usuario p = new Usuario();
 		p.setId(idUsuario);
 		
 		boolean removeu = usuariosCadastrados.remove(p);
+		
+		if(p.getId() == userLogado.getId()) {
+			sessao.setAttribute("userLogado", null);
+		}
 		
 		if(removeu) {
 			attr.addAttribute("msgSucesso", "Remoção bem sucedida");
@@ -80,11 +85,16 @@ public class BuscaUsuarioController {
 			attr.addAttribute("msgErro", "O produto não foi removido");
 		}
 		
-		return "redirect:/produto/buscar";
+		return "redirect:/";
 	}
 	
 	@GetMapping("/gerenciarUsuarios")
-	public String gerenciarUsuarios() {
+	public String gerenciarUsuarios(ModelMap model, HttpSession sessao) {
+		
+		List<Usuario> usuariosCadastrados = (List<Usuario>) sessao.getAttribute("usuariosCadastrados");
+		
+		model.addAttribute("usuariosCadastrados" ,usuariosCadastrados);
+		model.addAttribute("pessoa", sessao.getAttribute("userLogado"));
 		return "todosUsuarios";
 	}
 }

@@ -16,8 +16,22 @@
         <nav>
 			<div class="usuario" th:if="${pessoa} != null">
 				<img src="/imagens/perfil_anonimo.jpg" alt="">
-				<label th:text="${pessoa.nome}"></label>
+				<label class="nome" th:text="${pessoa.nome}"></label>
                 <a href="/usuario/logoff" class="sair">Sair</a>
+
+                <input type="checkbox" id="cog">
+                <label for="cog" class="engrenagem"><i id="porca" class="fas fa-cog"></i></label>
+
+                <div class="configUser">
+                    <table>
+                        <tr>
+                            <td><a href="/gerenciarUsuarios">Gerenciar usuários</a></li></td>
+                        </tr>
+                        <tr>
+                            <td><a href="/usuario/logoff" class="sair">Sair</a></li></td>
+                        </tr>
+                    </table>
+                </div>
 			</div>
 			
             <div class="ul">
@@ -45,26 +59,24 @@
         	<h1>GESTÃO DE USUÁRIOS</h1>
         	<hr>
             
-            <div th:if="${produtosEncontrados} != null">
+            <div th:if="${usuariosCadastrados} != null">
             	<table style="margin-top: 30px;">
 					<tr>
 						<td colspan="4" style="text-align: center; font-weight: bold;">TABELA DE PRODUTOS</td>
 					</tr>
             		<tr>
-            			<th>ID</th>
-            			<th>Descrição</th>
-            			<th>Categoria</th>
+            			<th>Nome</th>
+            			<th>Email</th>
             			<th>Opções</th>
             		</tr>
-            		<tr th:each="u : ${produtosEncontrados}">
-						<td th:text="${u.id}"></td>
-						<td th:text="${u.descricao}"></td>
-						<td th:text="${u.categoria}"></td>
+            		<tr th:each="u : ${usuariosCadastrados}">
+						<td th:text="${u.nome}"></td>
+						<td th:text="${u.email}"></td>
 						<td>
-							<a th:href="'/produto/editar/' + ${u.id}">
+							<a th:href="'/usuario/editar/' + ${u.id}">
 								<i class="fas fa-edit"></i>
 							</a>
-							<a th:href="'/produto/remover/' + ${u.id}" onclick="if(!confirm('Você quer realmente remover o produto?')) return false;">
+							<a th:href="'/remover/' + ${u.id}" onclick="if(!confirm('Você quer realmente remover o produto?')) return false;">
 								<i class="fas fa-trash-alt"></i>
 							</a>
 						</td>
@@ -72,7 +84,7 @@
             	</table>
             </div>
 
-            <h4 th:if="${produtosEncontrados} == null" style="color: rgba(255, 0, 0, 0.87);">Nenhum produto encontrado</h4>
+            <h4 th:if="${usuariosCadastrados} == null" style="color: rgba(255, 0, 0, 0.87);">Nenhum produto encontrado</h4>
             
         </div>
 

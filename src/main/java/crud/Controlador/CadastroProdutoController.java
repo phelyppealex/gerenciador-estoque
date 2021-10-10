@@ -27,6 +27,7 @@ public class CadastroProdutoController {
 	public String cadastro(ModelMap model, HttpSession sessao) {
 		model.addAttribute("produto", new Produto());
 		model.addAttribute("usuario", new Usuario());
+		model.addAttribute("categorias", issae());
 		model.addAttribute("pessoa", sessao.getAttribute("userLogado"));
 		return "cadastro";
 	}
