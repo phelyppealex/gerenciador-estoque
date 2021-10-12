@@ -82,10 +82,10 @@
                     <br><br>
                 </div>
     
-                <div th:if="${msgErro} != null">
+                <div th:if="${msgErro} != null" style="height: 30px;">
                     <ul>
                         <li th:each="m : ${msgErro}">
-                            <h4 th:text="${m}" style="color: red; font-family: sans-serif; font-weight: bold; font-size: 14px;"></h4>
+                            <h5 th:text="${m}" style="color: red; font-family: sans-serif; font-weight: bold; font-size: 14px;"></h5>
                         </li>
                     </ul>
                     <br><br>

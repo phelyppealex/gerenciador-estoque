@@ -65,7 +65,7 @@ public class CadastroUsuarioController {
 		return "redirect:/";
 	}
 
-	@GetMapping("/editar/{id}")
+	@GetMapping("/editarUsuario/{id}")
 	public String editarProduto(@PathVariable("id") Integer idUsuario, HttpSession sessao, ModelMap model) {
 		List<Usuario> usuariosCadastrados = (List<Usuario>) sessao.getAttribute("usuariosCadastrados");
 		
@@ -166,5 +166,31 @@ public class CadastroUsuarioController {
 	public String paginaDeCadastro(ModelMap model, HttpSession sessao) {
 		model.addAttribute("usuario", new Usuario());
 		return "signUp";
+	}
+	
+	@GetMapping("/update")
+	public String update(HttpSession sessao, ModelMap model){
+		Usuario userLogado = (Usuario) sessao.getAttribute("userLogado");
+		model.addAttribute("usuario", userLogado);
+		return "editarUser";
+	}
+	
+	@PostMapping("/editar")
+	public String editar(Usuario usuario, HttpSession sessao, ModelMap model) {
+		sessao.setAttribute("userLogado", usuario);
+		List<Usuario> usuariosCadastrados = (List<Usuario>) sessao.getAttribute("usuariosCadastrados");
+		
+		Usuario u = new Usuario();
+		u.setId(usuario.getId());
+
+		usuariosCadastrados.remove(u);
+		usuariosCadastrados.add(usuario);
+		
+		sessao.setAttribute("userLogado", usuario);
+		sessao.setAttribute("usuariosCadastrados", usuariosCadastrados);
+		
+		model.addAttribute("pessoa", usuario);
+		
+		return "inicio";
 	}
 }
