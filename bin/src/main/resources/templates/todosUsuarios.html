@@ -62,7 +62,7 @@
             <div th:if="${usuariosCadastrados} != null">
             	<table style="margin-top: 30px;">
 					<tr>
-						<td colspan="4" style="text-align: center; font-weight: bold;">TABELA DE USUÁRIOS</td>
+						<td colspan="4" style="text-align: center; font-weight: bold;">TABELA DE PRODUTOS</td>
 					</tr>
             		<tr>
             			<th>Nome</th>
@@ -73,6 +73,9 @@
 						<td th:text="${u.nome}"></td>
 						<td th:text="${u.email}"></td>
 						<td>
+							<a th:href="'/usuario/editar/' + ${u.id}">
+								<i class="fas fa-edit"></i>
+							</a>
 							<a th:href="'/remover/' + ${u.id}" onclick="if(!confirm('Você quer realmente remover o produto?')) return false;">
 								<i class="fas fa-trash-alt"></i>
 							</a>

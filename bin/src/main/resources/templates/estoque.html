@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="/css/inicioCss.css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
 
-        <title>Gerenciar Usuários - RFP</title>
+        <title>Estoque - RFP</title>
     </head>
     <body>
         
@@ -36,8 +36,20 @@
 			
             <div class="ul">
                 <a href="/">
-                	<div class="li selected"><i class="fas fa-home"></i> <span>Início</span> </div>
+                	<div class="li"><i class="fas fa-home"></i> <span>Início</span> </div>
                 </a>
+				<a href="/produto/cadastro">
+					<div class="li"><i class="fas fa-address-card"></i> <span>Cadastro</span> </div>
+				</a>
+				<a href="/produto/mensagem">
+					<div class="li"><i class="fas fa-edit"></i> <span>Editar produto</span> </div>
+				</a>
+				<a href="/produto/busca">
+					<div class="li"><i class="fas fa-search"></i> <span>Buscar</span> </div>
+				</a>
+				<a href="/produto/estoque">
+					<div class="li  selected"><i class="fas fa-layer-group"></i> <span>Estoque</span> </div>
+				</a>
             </div>
         </nav>
 
@@ -56,24 +68,29 @@
         </header>
         
         <div class="bloco">
-        	<h1>GESTÃO DE USUÁRIOS</h1>
+        	<h1>ESTOQUE DE PRODUTOS</h1>
         	<hr>
             
-            <div th:if="${usuariosCadastrados} != null">
+            <div th:if="${produtosEncontrados} != null">
             	<table style="margin-top: 30px;">
 					<tr>
-						<td colspan="4" style="text-align: center; font-weight: bold;">TABELA DE USUÁRIOS</td>
+						<td colspan="4" style="text-align: center; font-weight: bold;">TABELA DE PRODUTOS</td>
 					</tr>
             		<tr>
-            			<th>Nome</th>
-            			<th>Email</th>
+            			<th>ID</th>
+            			<th>Descrição</th>
+            			<th>Categoria</th>
             			<th>Opções</th>
             		</tr>
-            		<tr th:each="u : ${usuariosCadastrados}">
-						<td th:text="${u.nome}"></td>
-						<td th:text="${u.email}"></td>
+            		<tr th:each="u : ${produtosEncontrados}">
+						<td th:text="${u.id}"></td>
+						<td th:text="${u.descricao}"></td>
+						<td th:text="${u.categoria}"></td>
 						<td>
-							<a th:href="'/remover/' + ${u.id}" onclick="if(!confirm('Você quer realmente remover o produto?')) return false;">
+							<a th:href="'/produto/editar/' + ${u.id}">
+								<i class="fas fa-edit"></i>
+							</a>
+							<a th:href="'/produto/remover/' + ${u.id}" onclick="if(!confirm('Você quer realmente remover o produto?')) return false;">
 								<i class="fas fa-trash-alt"></i>
 							</a>
 						</td>
@@ -81,7 +98,7 @@
             	</table>
             </div>
 
-            <h4 th:if="${usuariosCadastrados} == null" style="color: rgba(255, 0, 0, 0.87);">Nenhum produto encontrado</h4>
+            <h4 th:if="${produtosEncontrados} == null" style="color: rgba(255, 0, 0, 0.87);">Nenhum produto encontrado</h4>
             
         </div>
 
