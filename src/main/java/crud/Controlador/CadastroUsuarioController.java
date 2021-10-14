@@ -115,11 +115,12 @@ public class CadastroUsuarioController {
 	}
 	
 	@GetMapping("/logoff")
-	public String logoff(HttpSession sessao) {
+	public String logoff(HttpSession sessao, ModelMap model) {
 		
 		sessao.setAttribute("userLogado", null);
+		model.addAttribute("pessoa", null);
 		
-		return "redirect:/produto/cadastro";
+		return "inicio";
 	}
 	
 	public List<String> validarDados(Usuario usuario){

@@ -12,6 +12,10 @@
         <title>Cadastro - RFP</title>
     </head>
     <body>
+
+		<input type="checkbox" id="dropDown">
+        <label for="dropDown" class="btnNav drop"><i class="fas fa-bars"></i></label>
+        <label for="dropDown" class="btnNav close"><i class="fas fa-times"></i></label>
         
         <nav>
         	<div class="usuario" th:if="${pessoa} != null">
@@ -40,6 +44,11 @@
 				<a href="/produto/mensagem"><div class="li"><i class="fas fa-edit"></i> <span>Editar produto</span> </div></a>
 				<a href="/produto/busca"><div class="li"><i class="fas fa-search"></i> <span>Buscar</span> </div></a>
 				<a href="/produto/estoque"><div class="li"><i class="fas fa-layer-group"></i> <span>Estoque</span> </div></a>
+            </div>
+
+			<div th:if="${pessoa} == null">
+                <a href="/usuario/paginadecadastro" class="linkNav linkCadastrar">CADASTRAR</a>
+                <a href="/usuario/paginadelogin" class="linkNav linkEntrar">ENTRAR</a>
             </div>
         </nav>
 

@@ -15,6 +15,7 @@ header{
 	display: inline-block;
 	margin-left: 275px;
 	user-select: none;
+	transition: .25s;
 }
 header img{
 	width: 48px;
@@ -41,6 +42,7 @@ nav{
     position: fixed;
     top: 0;
 	user-select: none;
+	transition: .25s;
 }
 nav .usuario{
 	position: relative;
@@ -110,9 +112,7 @@ nav .ul .li span{
 	transition: .1s;
 }
 .bloco{
-	margin-left: 275px;
-	margin-top: 110px;
-	margin-right: 50px;
+	margin: 110px 50px 0 275px;
 	border-radius: 5px;
 	padding: 20px;
 	box-shadow: 1px 0 5px rgb(110, 110, 110);
@@ -226,7 +226,6 @@ input[type="checkbox"]{
 	position: absolute;
 	transform: translate(0, -50%);
 	top: 50%;
-	right: 50px;
 	box-shadow: 1px 0 5px rgb(66, 66, 66);
 	text-decoration: none;
 }
@@ -234,7 +233,7 @@ input[type="checkbox"]{
 .btnCadastro{
 	background-color: rgb(23, 23, 167);
 	color: white;
-	margin-right: 91px;
+	right: 140px;
 }
 .btnCadastro:hover{
 	background-color: rgb(28, 124, 202);
@@ -243,6 +242,7 @@ input[type="checkbox"]{
 .btnLogin{
 	background-color: rgb(45, 180, 45);
 	color: black;
+	right: 50px;
 }
 .btnLogin:hover{
 	background-color: rgb(57, 236, 57);
@@ -315,6 +315,10 @@ input[type="checkbox"]{
 #cog:checked ~ .engrenagem i{
 	transform: rotate(90deg);
 }
+#cog:checked ~ .engrenagem{
+	background-color: rgb(220, 220, 220);
+	box-shadow: inset 0 0 2px 2px rgba(0, 0, 0, 0.118);
+}
 #cog:checked ~ .configUser{
 	display: block;
 }
@@ -355,5 +359,112 @@ nav .usuario:hover .engrenagem{
 	transform: translate(50%, 50%);
 	bottom: 50%;
 	right: 50%;
-	
+}
+#dropDown{
+	display: none;
+}
+.drop{
+	display: none;
+}
+.close{
+	display: none;
+}
+.linkNav{
+	display: none;
+}
+
+@media screen and (max-width: 900px){
+	.btnNav{
+		text-shadow: none;
+		margin-left: 0;
+		padding: 0 20px;
+		font-size: 33px;
+		height: initial;
+		width: initial;
+		color: rgb(114, 114, 114);
+		position: fixed;
+		z-index: 101;
+		top: 0;
+		left: 0;
+		line-height: 70px;
+		cursor: pointer;
+	}
+	.drop{
+		display: block;
+	}
+	.close{
+
+	}
+	header{
+		width: 100%;
+		height: 70px;
+		margin-left: 0;
+		background-color: white;
+		box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.500);
+	}
+	header img{
+		height: 40px;
+		width: 40px;
+		margin-top: 14px;
+		float: right;
+		margin-right: 15px;
+	}
+	header label{
+		font-size: 22px;
+		line-height: 68px;
+		text-shadow: 1px .5px 2px black;
+		margin-left: 70px;
+	}
+	div.usuario{
+		margin-top: 70px;
+	}
+	.configUser{
+		margin-top: 50px;
+	}
+	nav{
+		display: none;
+		z-index: 100;
+		transition: .25s;
+		width: 225px;
+	}
+	#dropDown:checked ~ nav{
+		display: block;
+	}
+	#dropDown:checked ~ .drop{
+		display: none;
+	}
+	#dropDown:checked ~ .close{
+		display: block;
+	}
+	.bloco{
+		margin: 110px 15px 0 15px;
+	}
+	.bloco h4{
+		text-align: justify;
+	}
+	.btnHeader{
+		display: none;
+	}
+	.linkNav{
+		display: block;
+		position: absolute;
+		width: 80%;
+		line-height: 40px;
+		text-align: center;
+		bottom: 0;
+		transform: translateX(50%);
+		right: 50%;
+		color: rgb(75, 75, 75);
+		font-weight: bold;
+		font-family: Verdana;
+		border: 1px solid rgba(0, 0, 0, 0.487);
+		border-radius: 7px;
+	}
+	.linkCadastrar{
+		margin-bottom: 5px;
+	}
+	.linkEntrar{
+		margin-bottom: 57px;
+	}
+
 }

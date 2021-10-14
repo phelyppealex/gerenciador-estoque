@@ -12,6 +12,10 @@
         <title>Início - RFP</title>
     </head>
     <body>
+
+        <input type="checkbox" id="dropDown">
+        <label for="dropDown" class="btnNav drop"><i class="fas fa-bars"></i></label>
+        <label for="dropDown" class="btnNav close"><i class="fas fa-times"></i></label>
         
         <nav>
             <div class="usuario" th:if="${pessoa} != null">
@@ -51,8 +55,13 @@
 				<a href="/produto/busca"><div class="li"><i class="fas fa-search"></i> <span>Buscar</span> </div></a>
 				<a href="/produto/estoque"><div class="li"><i class="fas fa-layer-group"></i> <span>Estoque</span> </div></a>
             </div>
+
+            <div th:if="${pessoa} == null">
+                <a href="/usuario/paginadecadastro" class="linkNav linkCadastrar">CADASTRAR</a>
+                <a href="/usuario/paginadelogin" class="linkNav linkEntrar">ENTRAR</a>
+            </div>
         </nav>
-        
+
         <header>
 	        <a href="/">
 				<img src="/imagens/logo.png" alt="Logo RFP">
@@ -62,7 +71,7 @@
 			</a>
 
             <div th:if="${pessoa} == null">
-                <a href="/usuario/paginadecadastro" class="btnHeader btnCadastro">CADASTRE-SE</a>
+                <a href="/usuario/paginadecadastro" class="btnHeader btnCadastro">CADASTRAR</a>
                 <a href="/usuario/paginadelogin" class="btnHeader btnLogin">ENTRAR</a>
             </div>
         </header>
@@ -70,7 +79,9 @@
         <div class="bloco">
         	<h1>SISTEMA GERENCIADOR DE PRODUTOS <i>RAIZ FAST PLAY</i></h1>
             <hr>
-
+			
+			<h4>Este site tem o objetivo de gerir os produtos da loja Raiz Fast Play. Melhorando a visão sob o estoque e administrando a entrada e saída dos mesmos na empresa.</h4>
+			
             <div th:if="${msgSucesso} != null">
 				<span th:text="${msgSucesso}" style="color: rgb(0, 163, 0); font-family: sans-serif; font-weight: bold;"></span>
 				<br><br>
