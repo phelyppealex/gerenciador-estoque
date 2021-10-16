@@ -71,30 +71,32 @@
 			</a>
 
             <div th:if="${pessoa} == null">
-                <a href="/usuario/paginadecadastro" class="btnHeader btnCadastro">CADASTRAR</a>
+                <a href="/usuario/paginadecadastro" class="btnHeader btnCadastro">CADASTRE-SE</a>
                 <a href="/usuario/paginadelogin" class="btnHeader btnLogin">ENTRAR</a>
             </div>
         </header>
         
         <div class="bloco">
+
+            <div th:if="${msgSucesso} != null">
+                <span th:text="${msgSucesso}" style="color: rgb(0, 163, 0); font-family: sans-serif; font-weight: bold;"></span>
+                <br><br>
+            </div>
+    
+            <div th:if="${msgErro} != null">
+                <ul>
+                    <li th:each="m : ${msgErro}">
+                        <span th:text="${m}" style="color: red; font-family: sans-serif; font-weight: bold;"></span>
+                    </li>
+                </ul>
+                <br><br>
+            </div>
+
         	<h1>SISTEMA GERENCIADOR DE PRODUTOS <i>RAIZ FAST PLAY</i></h1>
             <hr>
 			
 			<h4>Este site tem o objetivo de gerir os produtos da loja Raiz Fast Play. Melhorando a visão sob o estoque e administrando a entrada e saída dos mesmos na empresa.</h4>
-			
-            <div th:if="${msgSucesso} != null">
-				<span th:text="${msgSucesso}" style="color: rgb(0, 163, 0); font-family: sans-serif; font-weight: bold;"></span>
-				<br><br>
-			</div>
-
-			<div th:if="${msgErro} != null">
-				<ul>
-					<li th:each="m : ${msgErro}">
-						<span th:text="${m}" style="color: red; font-family: sans-serif; font-weight: bold;"></span>
-					</li>
-				</ul>
-				<br><br>
-			</div>
         </div>
+        
     </body>
 </html>

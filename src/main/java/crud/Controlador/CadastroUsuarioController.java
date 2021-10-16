@@ -111,7 +111,7 @@ public class CadastroUsuarioController {
 		
 		model.addAttribute("produto", new Produto());
 		
-		return "cadastro";
+		return "inicio";
 	}
 	
 	@GetMapping("/logoff")
