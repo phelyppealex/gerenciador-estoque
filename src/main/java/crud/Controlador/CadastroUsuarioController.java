@@ -95,11 +95,9 @@ public class CadastroUsuarioController {
 		
 		for (Usuario log : usuariosCadastrados) {
 			if( log.getEmail() .equals(login.getEmail()) && log.getSenha() .equals(login.getSenha()) ) {
-				CadastroProdutoController categ = new CadastroProdutoController();
 				sessao.setAttribute("userLogado", log);
 				model.addAttribute("pessoa", sessao.getAttribute("userLogado"));
 				model.addAttribute("msgSucesso", "Login efetuado com sucesso!");
-				model.addAttribute("categorias", categ.issae());
 				achouUsuario = true;
 			}
 		}

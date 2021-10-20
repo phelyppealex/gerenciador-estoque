@@ -21,7 +21,7 @@
         	<div class="usuario" th:if="${pessoa} != null">
 				<img src="/imagens/perfil_anonimo.jpg" alt="">
 				<label class="nome" th:text="${pessoa.nome}"></label>
-                <a href="/usuario/logoff" class="sair">Sair</a>
+                <a href="/usuario/logoff" class="sair" onclick="if(!confirm('Tem certeza que quer sair?')) return false;">Sair</a>
 
                 <input type="checkbox" id="cog">
                 <label for="cog" class="engrenagem"><i id="porca" class="fas fa-cog"></i></label>

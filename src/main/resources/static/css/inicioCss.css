@@ -70,6 +70,7 @@ nav .usuario .sair{
 	bottom: 2px;
 	margin-left: 5px;
 	padding: 2px;
+	transition: .25s;
 }
 nav .usuario .sair:hover{
 	color: white;
@@ -350,11 +351,12 @@ nav .usuario:hover .engrenagem{
 	position: static;
 	border: none;
 }
-.configUser table td{
+.configUser table tr td{
 	padding: 0;
 	position: relative;
 	height: 30px;
 	width: 200px;
+	border: none;
 }
 .configUser table td a{
 	padding: 0px;
