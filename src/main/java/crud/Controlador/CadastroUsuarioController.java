@@ -64,21 +64,6 @@ public class CadastroUsuarioController {
 		
 		return "redirect:/";
 	}
-
-	@GetMapping("/editarUsuario/{id}")
-	public String editarProduto(@PathVariable("id") Integer idUsuario, HttpSession sessao, ModelMap model) {
-		List<Usuario> usuariosCadastrados = (List<Usuario>) sessao.getAttribute("usuariosCadastrados");
-		
-		Usuario u = new Usuario();
-		u.setId(idUsuario);
-		
-		int posicao = usuariosCadastrados.indexOf(u);
-		u = usuariosCadastrados.get(posicao);
-		
-		model.addAttribute("usuario", u);
-		
-		return "editar";
-	}
 	
 	@PostMapping("/login")
 	public String login(Usuario login, HttpSession sessao, ModelMap model) {
@@ -176,7 +161,6 @@ public class CadastroUsuarioController {
 	
 	@PostMapping("/editar")
 	public String editar(Usuario usuario, HttpSession sessao, ModelMap model) {
-		sessao.setAttribute("userLogado", usuario);
 		List<Usuario> usuariosCadastrados = (List<Usuario>) sessao.getAttribute("usuariosCadastrados");
 		
 		Usuario u = new Usuario();
