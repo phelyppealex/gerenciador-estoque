@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,10 +18,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import crud.Produtos.Produto;
+import crud.repository.ProdutoRepository;
 
 @Controller
 @RequestMapping("/produto")
 public class BuscaProdutoController {
+
+	@Autowired
+	private ProdutoRepository produtoRepository;
 	
 	@GetMapping("/busca")
 	public String cadastro(ModelMap model, HttpSession sessao) {
@@ -34,24 +39,9 @@ public class BuscaProdutoController {
 			             @RequestParam(name="mostrarTodosDados", required=false) Boolean mostrarTodosDados,
 			             HttpSession sessao, ModelMap model) {
 		
-		List<Produto> produtosCadastrados = (List<Produto>) sessao.getAttribute("produtosCadastrados");
-		List<Produto> produtosEncontrados = new ArrayList<>();
+		List<Produto> produtosEncontrados = produtoRepository.findByDescricao(descricao);
+
 		model.addAttribute("pessoa", sessao.getAttribute("userLogado"));
-		
-		if((descricao == null || descricao.isEmpty()) & produtosCadastrados != null) {
-			
-			produtosEncontrados = produtosCadastrados;
-			
-		}else if((descricao != null || !descricao.isEmpty()) & produtosCadastrados != null){
-			
-			produtosEncontrados = (List<Produto>) produtosCadastrados.stream()
-					.filter(
-						u -> u.getDescricao().toLowerCase().contains(
-							descricao.toLowerCase()
-						)
-					).collect(Collectors.toList());
-		}
-		
 		model.addAttribute("produtosEncontrados", produtosEncontrados);
 		
 		if(mostrarTodosDados != null) {
@@ -62,13 +52,11 @@ public class BuscaProdutoController {
 	
 	@GetMapping("/estoque")
 	public String estoque(ModelMap model, HttpSession sessao){
-		List<Produto> produtosCadastrados = (List<Produto>) sessao.getAttribute("produtosCadastrados");
-		List<Produto> produtosEncontrados = new ArrayList<>();
+
+		List<Produto> produtosEncontrados = produtoRepository.findAll();
 		model.addAttribute("pessoa", sessao.getAttribute("userLogado"));
-		
-		produtosEncontrados = produtosCadastrados;
-		
 		model.addAttribute("produtosEncontrados", produtosEncontrados);
+
 		return "estoque";
 	}
 	

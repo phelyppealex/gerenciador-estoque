@@ -48,6 +48,7 @@ public class CadastroProdutoController {
 	
 		produtoRepository.save(produto);
 		attr.addFlashAttribute("msgSucesso", "Edição bem sucedida!");
+		attr.addFlashAttribute("pessoa", sessao.getAttribute("userLogado"));
 		
 		return "redirect:/produto/cadastro";
 	}

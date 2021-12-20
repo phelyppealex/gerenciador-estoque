@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,9 +17,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import crud.Usuarios.Usuario;
+import crud.repository.UsuarioRopository;
 
 @Controller
 public class BuscaUsuarioController {
+
+	@Autowired
+	private UsuarioRopository usuarioRopository;
+
     @GetMapping("/busca")
 	public String cadastro(ModelMap model) {
 		model.addAttribute("usuario", new Usuario());
@@ -29,28 +36,13 @@ public class BuscaUsuarioController {
 			             @RequestParam(name="mostrarTodosDados", required=false) Boolean mostrarTodosDados,
 			             HttpSession sessao, ModelMap model) {
 		
-		List<Usuario> usuariosCadastrados = (List<Usuario>) sessao.getAttribute("produtosCadastrados");
-		List<Usuario> usuariosEncontrados = new ArrayList<>();
-		
-		if((nome == null || nome.isEmpty()) & usuariosCadastrados != null) {
-			
-			usuariosEncontrados = usuariosCadastrados;
-			
-		}else if((nome != null || !nome.isEmpty()) & usuariosCadastrados != null){
-			
-			usuariosEncontrados = (List<Usuario>) usuariosCadastrados.stream()
-					.filter(
-						u -> u.getNome().toLowerCase().contains(
-							nome.toLowerCase()
-						)
-					).collect(Collectors.toList());
-		}
-		
+		List<Usuario> usuariosEncontrados = usuarioRopository.findByNome(nome);
 		model.addAttribute("usuariosEncontrados", usuariosEncontrados);
-		
+
 		if(mostrarTodosDados != null) {
 			model.addAttribute("mostrarTodosDados", true);
 		}
+		
 		return "busca";
 	}
 	
@@ -91,7 +83,7 @@ public class BuscaUsuarioController {
 	@GetMapping("/gerenciarUsuarios")
 	public String gerenciarUsuarios(ModelMap model, HttpSession sessao) {
 		
-		List<Usuario> usuariosCadastrados = (List<Usuario>) sessao.getAttribute("usuariosCadastrados");
+		List<Usuario> usuariosCadastrados = usuarioRopository.findAll();
 		
 		model.addAttribute("usuariosCadastrados" ,usuariosCadastrados);
 		model.addAttribute("pessoa", sessao.getAttribute("userLogado"));

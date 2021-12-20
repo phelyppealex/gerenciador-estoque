@@ -39,6 +39,7 @@ public class CadastroUsuarioController {
 		
 		usuarioRopository.save(usuario);
 		attr.addFlashAttribute("msgSucesso", "Edição bem sucedida!");
+		attr.addFlashAttribute("pessoa", sessao.getAttribute("userLogado"));
 		
 		return "redirect:/";
 	}
