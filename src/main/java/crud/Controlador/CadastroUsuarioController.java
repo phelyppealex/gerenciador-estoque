@@ -2,6 +2,7 @@ package crud.Controlador;
 
 import crud.Produtos.Produto;
 import crud.Usuarios.Usuario;
+import crud.repository.UsuarioRopository;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -11,6 +12,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionContext;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,44 +25,20 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/usuario")
 public class CadastroUsuarioController {
 
+	@Autowired
+	private UsuarioRopository usuarioRopository;
+
     @PostMapping("/salvar")
 	public String salvar(Usuario usuario, RedirectAttributes attr, HttpSession sessao){
-		
-		Integer id = (Integer) sessao.getAttribute("idUsuario");
-		List<Usuario> usuariosCadastrados = (List<Usuario>) sessao.getAttribute("usuariosCadastrados");
-		attr.addAttribute("pessoa", (Usuario)sessao.getAttribute("userLogado"));
 		
 		List<String> msgErro = validarDados(usuario);
 
 		if(!msgErro.isEmpty()){
 			attr.addFlashAttribute("msgErro", msgErro);
 		}
-
-		if(id == null) {
-			id = 1;
-		}
 		
-		if(usuariosCadastrados == null) {
-			usuariosCadastrados = new ArrayList<>();
-		}
-		
-		//Testando se é edição ou cadastro
-		if(usuario.getId() == 0) {
-			//Cadastro
-			usuario.setId(id);
-			usuariosCadastrados.add(usuario);
-			
-			id++;
-			sessao.setAttribute("idUsuario", id);
-			sessao.setAttribute("usuariosCadastrados", usuariosCadastrados);
-			
-			attr.addFlashAttribute("msgSucesso", "Cadastrado com sucesso");
-		}else {
-			//Edição
-			usuariosCadastrados.remove(usuario);
-			usuariosCadastrados.add(usuario);
-			attr.addFlashAttribute("msgSucesso", "Edição bem sucedida!");
-		}
+		usuarioRopository.save(usuario);
+		attr.addFlashAttribute("msgSucesso", "Edição bem sucedida!");
 		
 		return "redirect:/";
 	}

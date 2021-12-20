@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.websocket.server.PathParam;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,10 +19,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import crud.Produtos.Produto;
 import crud.Usuarios.Usuario;
+import crud.repository.ProdutoRepository;
 
 @Controller
 @RequestMapping("/produto")
 public class CadastroProdutoController {
+
+	@Autowired
+	private ProdutoRepository produtoRepository;
 
 	@GetMapping("/cadastro")
 	public String cadastro(ModelMap model, HttpSession sessao) {
@@ -35,41 +40,14 @@ public class CadastroProdutoController {
 	@PostMapping("/salvar")
 	public String salvar(Produto produto, RedirectAttributes attr, HttpSession sessao){
 		
-		Integer id = (Integer) sessao.getAttribute("id");
-		List<Produto> produtosCadastrados = (List<Produto>) sessao.getAttribute("produtosCadastrados");
-		attr.addFlashAttribute("pessoa", sessao.getAttribute("userLogado"));
-
 		List<String> msgErro = validarDados(produto);
 
 		if(!msgErro.isEmpty()){
 			attr.addFlashAttribute("msgErro", msgErro);
 		}
-
-		if(id == null) {
-			id = 1;
-		}
-		
-		if(produtosCadastrados == null) {
-			produtosCadastrados = new ArrayList<>();
-		}
-		
-		//Testando se é edição ou cadastro
-		if(produto.getId() == 0) {
-			//Cadastro
-			produto.setId(id);
-			produtosCadastrados.add(produto);
-			
-			id++;
-			sessao.setAttribute("id", id);
-			sessao.setAttribute("produtosCadastrados", produtosCadastrados);
-			
-			attr.addFlashAttribute("msgSucesso", "Cadastrado com sucesso");
-		}else {
-			//Edição
-			produtosCadastrados.remove(produto);
-			produtosCadastrados.add(produto);
-			attr.addFlashAttribute("msgSucesso", "Edição bem sucedida!");
-		}
+	
+		produtoRepository.save(produto);
+		attr.addFlashAttribute("msgSucesso", "Edição bem sucedida!");
 		
 		return "redirect:/produto/cadastro";
 	}
