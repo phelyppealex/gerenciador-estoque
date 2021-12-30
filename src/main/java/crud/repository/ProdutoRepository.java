@@ -10,7 +10,7 @@ import crud.Produtos.Produto;
 
 public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
     
-    @Query("Select u from Produtos u where u.descricao like %:descricao%")
+    @Query("select u from Produto u where u.descricao like %:descricao%")
     List<Produto> findByDescricao(@Param("descricao") String descricao);
 
 }
