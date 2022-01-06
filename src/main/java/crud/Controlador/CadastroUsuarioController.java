@@ -47,7 +47,7 @@ public class CadastroUsuarioController {
 	@PostMapping("/login")
 	public String login(Usuario login, HttpSession sessao, ModelMap model) {
 		
-		List<Usuario> usuariosCadastrados = (List<Usuario>) sessao.getAttribute("usuariosCadastrados");
+		List<Usuario> usuariosCadastrados = usuarioRopository.findAll();
 		Usuario userLogado = (Usuario) sessao.getAttribute("userLogado");
 		
 		boolean achouUsuario = false;
@@ -140,13 +140,8 @@ public class CadastroUsuarioController {
 	
 	@PostMapping("/editar")
 	public String editar(Usuario usuario, HttpSession sessao, ModelMap model) {
-		List<Usuario> usuariosCadastrados = (List<Usuario>) sessao.getAttribute("usuariosCadastrados");
-		
 		usuarioRopository.save(usuario);
-		
 		sessao.setAttribute("userLogado", usuario);
-		sessao.setAttribute("usuariosCadastrados", usuariosCadastrados);
-		
 		model.addAttribute("pessoa", usuario);
 		
 		return "inicio";

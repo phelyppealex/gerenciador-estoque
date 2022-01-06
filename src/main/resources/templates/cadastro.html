@@ -92,7 +92,7 @@
                 <h4>Você precisa fazer login para fazer cadastro de produtos</h4>
             </div>
 
-			<form th:if="${pessoa} == null" th:action="@{/produto/salvar}" th:object="${produto}" method="post">
+			<form th:if="${pessoa} != null" th:action="@{/produto/salvar}" th:object="${produto}" method="post">
 				
 				<ul>
 					<li><h4>Descrição</h4></li>

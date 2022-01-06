@@ -59,23 +59,15 @@ public class BuscaUsuarioController {
 	
 	@GetMapping("/remover/{id}")
 	public String remover(@PathVariable("id") Integer idUsuario, RedirectAttributes attr, HttpSession sessao) {
-		List<Usuario> usuariosCadastrados = (List<Usuario>) sessao.getAttribute("usuariosCadastrados");
 		Usuario userLogado = (Usuario) sessao.getAttribute("userLogado");
 		
-		Usuario p = new Usuario();
-		p.setId(idUsuario);
+		usuarioRopository.deleteById(idUsuario);
 		
-		boolean removeu = usuariosCadastrados.remove(p);
-		
-		if(p.getId() == userLogado.getId()) {
+		if(idUsuario == userLogado.getId()) {
 			sessao.setAttribute("userLogado", null);
 		}
 		
-		if(removeu) {
-			attr.addAttribute("msgSucesso", "Remoção bem sucedida");
-		}else {
-			attr.addAttribute("msgErro", "O produto não foi removido");
-		}
+		attr.addAttribute("msgSucesso", "Remoção bem sucedida");
 		
 		return "redirect:/";
 	}
