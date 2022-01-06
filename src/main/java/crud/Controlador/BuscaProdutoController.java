@@ -62,18 +62,9 @@ public class BuscaProdutoController {
 	
 	@GetMapping("/remover/{id}")
 	public String remover(@PathVariable("id") Integer idProduto, RedirectAttributes attr, HttpSession sessao) {
-		List<Produto> produtosCadastrados = (List<Produto>) sessao.getAttribute("produtosCadastrados");
 		
-		Produto p = new Produto();
-		p.setId(idProduto);
-		
-		boolean removeu = produtosCadastrados.remove(p);
-		
-		if(removeu) {
-			attr.addAttribute("msgSucesso", "Remoção bem sucedida");
-		}else {
-			attr.addAttribute("msgErro", "O produto não foi removido");
-		}
+		produtoRepository.deleteById(idProduto);
+		attr.addAttribute("msgSucesso", "Remoção bem sucedida");
 		
 		return "redirect:/produto/buscar";
 	}
@@ -81,7 +72,7 @@ public class BuscaProdutoController {
 	@ModelAttribute("categorias")
 	public List<String>  issae() {
 	return Arrays.asList("Eletrônico", "Eletrodoméstico",
-			"Alimento", "Prod. Limpeza", "Bebida", "Papelaria", "Higiene", "Outra");
+						"Alimento", "Prod. Limpeza", "Bebida", "Papelaria", "Higiene", "Outra");
 	}
 	
 	

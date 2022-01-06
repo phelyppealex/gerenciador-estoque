@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import crud.Produtos.Produto;
 import crud.Usuarios.Usuario;
 import crud.repository.ProdutoRepository;
+import crud.repository.UsuarioRopository;
 
 @Controller
 @RequestMapping("/produto")
@@ -55,13 +56,8 @@ public class CadastroProdutoController {
 	
 	@GetMapping("/editar/{id}")
 	public String editarProduto(@PathVariable("id") Integer idProduto, HttpSession sessao, ModelMap model) {
-		List<Produto> produtosCadastrados = (List<Produto>) sessao.getAttribute("produtosCadastrados");
 		
-		Produto p = new Produto();
-		p.setId(idProduto);
-		
-		int posicao = produtosCadastrados.indexOf(p);
-		p = produtosCadastrados.get(posicao);
+		Produto p = produtoRepository.findById(idProduto).get();
 		
 		model.addAttribute("produto", p);
 		

@@ -142,11 +142,7 @@ public class CadastroUsuarioController {
 	public String editar(Usuario usuario, HttpSession sessao, ModelMap model) {
 		List<Usuario> usuariosCadastrados = (List<Usuario>) sessao.getAttribute("usuariosCadastrados");
 		
-		Usuario u = new Usuario();
-		u.setId(usuario.getId());
-
-		usuariosCadastrados.remove(u);
-		usuariosCadastrados.add(usuario);
+		usuarioRopository.save(usuario);
 		
 		sessao.setAttribute("userLogado", usuario);
 		sessao.setAttribute("usuariosCadastrados", usuariosCadastrados);
