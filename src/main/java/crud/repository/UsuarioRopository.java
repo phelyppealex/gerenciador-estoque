@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import crud.Usuarios.Usuario;
+import crud.model.Usuario;
 
 public interface UsuarioRopository extends JpaRepository<Usuario, Integer>{
     

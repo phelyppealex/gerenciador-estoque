@@ -1,7 +1,7 @@
-package crud.Controlador;
+package crud.controller;
 
-import crud.Produtos.Produto;
-import crud.Usuarios.Usuario;
+import crud.model.Produto;
+import crud.model.Usuario;
 import crud.repository.UsuarioRopository;
 
 import java.util.ArrayList;

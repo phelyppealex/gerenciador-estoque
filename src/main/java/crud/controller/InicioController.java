@@ -1,4 +1,4 @@
-package crud.Controlador;
+package crud.controller;
 
 import javax.servlet.http.HttpSession;
 

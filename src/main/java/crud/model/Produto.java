@@ -1,4 +1,4 @@
-package crud.Produtos;
+package crud.model;
 
 import java.util.Objects;
 

@@ -1,4 +1,4 @@
-package crud.Controlador;
+package crud.controller;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import crud.Usuarios.Usuario;
+import crud.model.Usuario;
 import crud.repository.UsuarioRopository;
 
 @Controller

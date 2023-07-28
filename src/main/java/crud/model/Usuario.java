@@ -1,4 +1,4 @@
-package crud.Usuarios;
+package crud.model;
 
 import java.util.Objects;
 
