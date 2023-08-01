@@ -1,7 +1,6 @@
 package crud.controller;
 
 import crud.model.Produto;
-import crud.model.Usuario;
 import crud.service.ProdutoService;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,7 +29,6 @@ public class ProdutoController {
 	@GetMapping("/cadastro")
 	public String cadastro(ModelMap model, HttpSession sessao) {
 		model.addAttribute("produto", new Produto());
-		model.addAttribute("usuario", new Usuario());
 		model.addAttribute("categorias", getCategorias());
 		model.addAttribute("pessoa", sessao.getAttribute("userLogado"));
 		return "cadastro";
@@ -38,16 +36,16 @@ public class ProdutoController {
 	
 	@PostMapping("/salvar")
 	public String salvar(Produto produto, RedirectAttributes attr, HttpSession sessao){
-		
 		List<String> msgErro = validarDados(produto);
+		attr.addFlashAttribute("pessoa", sessao.getAttribute("userLogado"));
 
 		if(!msgErro.isEmpty()){
 			attr.addFlashAttribute("msgErro", msgErro);
+			return "redirect:/produto/cadastro";
 		}
 	
 		service.save(produto);
 		attr.addFlashAttribute("msgSucesso", "Edição bem sucedida!");
-		attr.addFlashAttribute("pessoa", sessao.getAttribute("userLogado"));
 		
 		return "redirect:/produto/cadastro";
 	}
