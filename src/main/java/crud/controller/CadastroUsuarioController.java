@@ -5,18 +5,14 @@ import crud.model.Usuario;
 import crud.repository.UsuarioRopository;
 
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpSessionContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -39,6 +35,7 @@ public class CadastroUsuarioController {
 		
 		usuarioRopository.save(usuario);
 		attr.addFlashAttribute("msgSucesso", "Edição bem sucedida!");
+		sessao.setAttribute("userLogado", usuario);
 		attr.addFlashAttribute("pessoa", sessao.getAttribute("userLogado"));
 		
 		return "redirect:/";

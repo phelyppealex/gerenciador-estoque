@@ -1,0 +1,11 @@
+version: "3.3"
+
+services:
+  db:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USERNAME: postgres
+      POSTGRES_PASSWORD: 1412
+      POSTGRES_DB: grenciador_estoque
