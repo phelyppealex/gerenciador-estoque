@@ -50,6 +50,36 @@ public class ProdutoController {
 		return "redirect:/produto/cadastro";
 	}
 	
+	@GetMapping("/busca")
+	public String busca(){
+		return "busca";
+	}
+	
+	@GetMapping("/buscar")
+	public String buscar(
+		@RequestParam(name="descricao", required=false) String descricao,
+		@RequestParam(name="mostrarTodosDados", required=false) Boolean mostrarTodosDados,
+		HttpSession sessao, ModelMap model
+	){
+		
+		model.addAttribute("pessoa", sessao.getAttribute("userLogado"));
+		model.addAttribute("produtosEncontrados", service.findByDescricao(descricao));
+		
+		if(!mostrarTodosDados) {
+			model.addAttribute("mostrarTodosDados", true);
+		}
+		return "busca";
+	}
+	
+	@GetMapping("/estoque")
+	public String estoque(ModelMap model, HttpSession sessao){
+
+		model.addAttribute("pessoa", sessao.getAttribute("userLogado"));
+		model.addAttribute("produtosEncontrados", service.findAll());
+
+		return "estoque";
+	}
+	
 	@GetMapping("/editar/{id}")
 	public String editarProduto(@PathVariable("id") Integer idProduto, HttpSession sessao, ModelMap model) {
 		
@@ -60,20 +90,15 @@ public class ProdutoController {
 		return "editar";
 	}
 
-	public List<String> validarDados(Produto produto){
-
-		List<String> msgs = new ArrayList<>();
-
-		if(produto.getDescricao() == null || produto.getDescricao().isEmpty()){
-			msgs.add("- O campo ''Descrição'' não foi preenchido!");
-		}
-		if(produto.getCategoria() == null || produto.getDescricao().isEmpty()){
-			msgs.add("- Selecione uma categoria!");
-		}
-
-		return msgs;
+	@GetMapping("/remover/{id}")
+	public String remover(@PathVariable("id") Integer idProduto, RedirectAttributes attr, HttpSession sessao) {
+		
+		service.delete(idProduto);
+		attr.addAttribute("msgSucesso", "Remoção bem sucedida");
+		
+		return "redirect:/produto/buscar";
 	}
-	
+
 	@GetMapping("/mensagem")
 	public String mensagem(ModelMap model, HttpSession sessao) {
 		int id = 0;
@@ -98,40 +123,18 @@ public class ProdutoController {
 			"Outra"
 		);
 	}
-	
-	
-	@GetMapping("/buscar")
-	public String buscar(@RequestParam(name="descricao", required=false) String descricao,
-			             @RequestParam(name="mostrarTodosDados", required=false) Boolean mostrarTodosDados,
-			             HttpSession sessao, ModelMap model) {
-		
-		List<Produto> produtosEncontrados = service.findByDescricao(descricao);
 
-		model.addAttribute("pessoa", sessao.getAttribute("userLogado"));
-		model.addAttribute("produtosEncontrados", produtosEncontrados);
-		
-		if(mostrarTodosDados != null) {
-			model.addAttribute("mostrarTodosDados", true);
+	public List<String> validarDados(Produto produto){
+
+		List<String> msgs = new ArrayList<>();
+
+		if(produto.getDescricao() == null || produto.getDescricao().isEmpty()){
+			msgs.add("- O campo ''Descrição'' não foi preenchido!");
 		}
-		return "busca";
-	}
-	
-	@GetMapping("/estoque")
-	public String estoque(ModelMap model, HttpSession sessao){
+		if(produto.getCategoria() == null || produto.getDescricao().isEmpty()){
+			msgs.add("- Selecione uma categoria!");
+		}
 
-		List<Produto> produtosEncontrados = service.findAll();
-		model.addAttribute("pessoa", sessao.getAttribute("userLogado"));
-		model.addAttribute("produtosEncontrados", produtosEncontrados);
-
-		return "estoque";
-	}
-	
-	@GetMapping("/remover/{id}")
-	public String remover(@PathVariable("id") Integer idProduto, RedirectAttributes attr, HttpSession sessao) {
-		
-		service.delete(idProduto);
-		attr.addAttribute("msgSucesso", "Remoção bem sucedida");
-		
-		return "redirect:/produto/buscar";
+		return msgs;
 	}
 }

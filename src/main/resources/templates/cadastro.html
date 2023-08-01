@@ -93,7 +93,6 @@
             </div>
 
 			<form th:if="${pessoa} != null" th:action="@{/produto/salvar}" th:object="${produto}" method="post">
-				
 				<ul>
 					<li><h4>Descrição</h4></li>
 					<li><input type="text" th:field="${produto.descricao}" placeholder="Ex.: Galaxy S9, TV Samsung 40''"></li>
@@ -111,7 +110,6 @@
 						<input type="submit" value="Cancelar" formaction="/" formmethod="get" class="cancel">
 					</li>
 				</ul>
-				
 			</form>
 			
         </div>
